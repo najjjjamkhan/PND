@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PND.Areas.Identity.Data
+@inject SignInManager<PNDUser> SignInManager
+@inject UserManager<PNDUser> UserManager
+
+@{
+    var email = UserManager.GetUserName(User);
+    string admin = "admin@gmail.com";
+}
+@model PND.Models.PatientViewModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+   <link href="~/css/Calender.css" rel="stylesheet"/>
+
+<style>
+
+    .center {
+        text-align: center;
+    }
+</style>
+<div class="container">
+
+        <h3>Patient Details</h3>
+        <hr />
+      </div>
+
+
+@if (Model != null)
+{
+
+
+  
+    <div class="container">
+        <table class="table table-bordered center mt-2">
+            <thead> 
+                <tr> 
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.PatientID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.PatientName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.Disease)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.EmailAddress)
+                    </th> 
+                   
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => modelItem.Patient.PatientID)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => modelItem.Patient.PatientName)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => modelItem.Patient.Disease)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => modelItem.Patient.Address)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(modelItem => modelItem.Patient.EmailAddress)
+                           
+                        </td>
+                    
+                       
+                    </tr>
+                
+            </tbody>
+        </table>
+        </div>
+
+
+
+   @*  <div class="container">
+            <table class="table table-bordered center" >
+                <thead>
+                    <tr>
+                        <th scope="col">Appointment ID</th>
+                        <th scope="col">Appointments Dates & Time</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in Model.Appointments)
+                    {
+                        <tr>
+                            <td>@item.ApID</td>
+                            <td>@item.ApDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>  *@
+   @*  }
+    else
+    {
+        
+    }  *@
+    <div>
+        <div class="header">
+            <div id="month"></div>
+            <div>
+                <button id="btnBack"><i class="fa fa-angle-left"></i></button>
+                <button id="btnNext"><i class="fa fa-angle-right"></i></button>
+            </div>
+        </div>
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div id="calendar"></div>
+    </div>
+    <div id="modal"></div>
+    <div id="addEvent">
+        <h2>Add Event</h2>
+        <input type="text" id="txtTitle" placeholder="Event Title" />
+        <button id="btnSave">Save</button>
+        <button class="btnClose">Close</button>
+    </div> 
+
+    <div id="viewEvent">
+        <h2>Event</h2>
+        <p id="eventText">This is Sample Event</p>
+        <button id="btnDelete">Delete</button>
+        <button class="btnClose">Close</button>
+    </div> 
+
+     
+
+        <script src="~/js/calender.js"></script>
+}

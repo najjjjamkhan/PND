@@ -1,0 +1,68 @@
+﻿@model PND.Models.Appointment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+        
+        <table class = "table table-bordered center">
+            <thead>
+                <tr>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.ApDate)
+ *@
+                         Appointment Date & Time
+
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                      @Html.DisplayFor(model => model.ApDate)
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.ApID }) |
+    <a asp-action="Index">Back to List</a> 
+</div>
+<div>
+    <a asp-action="PIndex" asp-controller="Patient" >Back to Doctors Portal</a>
+
+</div>

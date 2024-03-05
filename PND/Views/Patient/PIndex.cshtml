@@ -1,0 +1,113 @@
+﻿@model IEnumerable<PND.Models.Patient>
+@using Microsoft.AspNetCore.Identity
+@using PND.Areas.Identity.Data
+
+@inject SignInManager<PNDUser> SignInManager
+@inject UserManager<PNDUser> UserManager
+
+@{
+    ViewData["Title"] = "PIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .center{
+        text-align:center;
+    }
+</style>
+<h2>Doctor's Portal</h2>
+
+<p>
+    <a class="btn btn-outline-secondary" asp-action="AddPatient">Create New Patient</a> 
+
+    <a class="btn btn-outline-secondary" asp-area="" asp-controller="Appointment" asp-action="Index">Appointments List</a>
+
+    <a class=" btn btn-outline-secondary" asp-area="" asp-controller="doctor" asp-action="Index">Doctors Manage</a>
+
+    
+</p>
+@{
+    if (TempData["insert_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["insert_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (TempData["Update_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["Update_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (TempData["Delete_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["Delete_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+}
+<table class="table table-bordered center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disease)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>Action</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disease)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+            <td>
+               
+                @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |
+               
+                @Html.ActionLink("Delete", "Delete", new { id = item.PatientID  }) |
+                
+                    @Html.ActionLink("Create Appointment", "Create", "Appointment", new { id = item.PatientID }) |
+                   
+                    @Html.ActionLink("View Appointment", "Details", "Appointment", new {id = item.PatientID})
+                   
+  
+
+                    @*  @Html.ActionLink("Delete", "Delete", new {  id=item.PatientID}) *@ 
+                @* @Html.ActionLink("Create", "Create", "Appointment")  *@
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+
+                

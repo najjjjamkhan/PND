@@ -1,0 +1,89 @@
+﻿@model IEnumerable<PND.Models.Doctor>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
+<h1>Doctors Dtails</h1>
+
+<p>
+    <a class="btn btn-outline-secondary" asp-action="AddDoctor">Create New</a>
+ 
+</p>
+
+@{
+    if(TempData["insert_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["insert_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+     if (TempData["Update_message"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>success</strong> @TempData["Update_message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    if (TempData["Delete_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["Delete_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+}
+<table class="table table-bordered center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dr_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specification)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dr_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specification)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Dr_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Dr_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Dr_ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="PIndex" asp-controller="Patient">Back to Doctors Portal</a>
+
+</div>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PND.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
+
+<h1>Appointments</h1>
+
+@* <p>
+    <a class="btn btn-outline-secondary" asp-action="Create">Create New</a>
+</p> *@
+@{
+    if (TempData["insert_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["insert_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (TempData["Update_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["Update_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (TempData["Delete_message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>success</strong> @TempData["Delete_message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+}
+<table class="table table-bordered center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApDate)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ApID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ApID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ApID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-action="PIndex" asp-controller="Patient">Back to Doctors Portal</a>
+
+</div>
